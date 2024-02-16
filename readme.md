@@ -9,10 +9,10 @@ This is a Django project for building a backend API to manage Deals and Projects
    ```python -m venv env```
 3. Activate the virtual environment.
     ```source env/bin/activate```
-4.   Install the project dependencies:
+4. Install the project dependencies:
     ```pip install -r requirements.txt```
-5. Apply the database migrations:
-    ```python manage.py migrate```
+5. Create the database migrations:
+    ```python manage.py makemigrations```
 6. Apply the database migrations:
     ```python manage.py migrate```
 7. To run the project, use the following command:
