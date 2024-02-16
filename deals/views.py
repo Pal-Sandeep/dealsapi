@@ -43,8 +43,6 @@ class DealViewSet(viewsets.ModelViewSet):
                 for project_data in projects_data:
                     project_id = project_data['project']
                     tax_credit_rate = project_data['tax_credit_transfer_rate']
-                    print(project_id, tax_credit_rate)
-                    print(tax_credit_rate, type(tax_credit_rate))
                     project = get_object_or_404(Project, pk=project_id)
                     DealProject.objects.create(
                         deal=deal, project=project, tax_credit_transfer_rate=Decimal(tax_credit_rate))
@@ -55,9 +53,6 @@ class DealViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         project_pk = request.data.get('project_pk')
-        print('project_pk', project_pk)
-        print(request.data['project_pk'])
-        print('kwargs', kwargs)
         if project_pk:
             project = get_object_or_404(Project, pk=project_pk)
             DealProject.objects.filter(project=project).delete()
