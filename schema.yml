@@ -1,0 +1,376 @@
+openapi: 3.0.3
+info:
+  title: CapeZero Backend
+  version: 1.0.0
+  description: CapeZero Backend API
+paths:
+  /deals/:
+    get:
+      operationId: deals_list
+      description: View for creating, reading, and deleting a deal
+      tags:
+      - deals
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deal'
+          description: ''
+    post:
+      operationId: deals_create
+      description: View for creating, reading, and deleting a deal
+      tags:
+      - deals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Deal'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Deal'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Deal'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deal'
+          description: ''
+  /deals/{id}/:
+    get:
+      operationId: deals_retrieve
+      description: View for creating, reading, and deleting a deal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this deal.
+        required: true
+      tags:
+      - deals
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deal'
+          description: ''
+    delete:
+      operationId: deals_destroy
+      description: View for creating, reading, and deleting a deal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this deal.
+        required: true
+      tags:
+      - deals
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /deals/{id}/project/add:
+    post:
+      operationId: deals_project_add_create
+      description: View for adding a project to an existing deal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - deals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealProjectAdd'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealProjectAdd'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DealProjectAdd'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealProjectAdd'
+          description: ''
+  /projects/:
+    get:
+      operationId: projects_list
+      description: View for creating, reading, updating, and deleting a deal
+      tags:
+      - projects
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+          description: ''
+    post:
+      operationId: projects_create
+      description: View for creating, reading, updating, and deleting a deal
+      tags:
+      - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+  /projects/{id}/:
+    get:
+      operationId: projects_retrieve
+      description: View for creating, reading, updating, and deleting a deal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this project.
+        required: true
+      tags:
+      - projects
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+    patch:
+      operationId: projects_partial_update
+      description: View for creating, reading, updating, and deleting a deal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this project.
+        required: true
+      tags:
+      - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+    delete:
+      operationId: projects_destroy
+      description: View for creating, reading, updating, and deleting a deal
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this project.
+        required: true
+      tags:
+      - projects
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Deal:
+      type: object
+      description: serializer for deal model
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/DealProject'
+          readOnly: true
+        total_tax_credit_transfer_amount:
+          type: string
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - name
+      - projects
+      - total_tax_credit_transfer_amount
+    DealProject:
+      type: object
+      description: serializer for dealproject model
+      properties:
+        project:
+          allOf:
+          - $ref: '#/components/schemas/Project'
+          readOnly: true
+        tax_credit_transfer_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,2})?$
+        tax_credit_transfer_amount:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - project
+      - tax_credit_transfer_amount
+      - tax_credit_transfer_rate
+    DealProjectAdd:
+      type: object
+      description: serializer for adding a project to an existing Deal
+      properties:
+        project:
+          type: integer
+        tax_credit_transfer_rate:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,2})?$
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - project
+      - tax_credit_transfer_rate
+    PatchedProject:
+      type: object
+      description: serializer for project model
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        fmv:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    Project:
+      type: object
+      description: serializer for project model
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        fmv:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - fmv
+      - id
+      - name
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

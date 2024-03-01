@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.db import transaction
+from django.shortcuts import render
 
 from rest_framework import viewsets, status
 from rest_framework.generics import get_object_or_404, CreateAPIView
@@ -8,6 +9,10 @@ from rest_framework.response import Response
 
 from deals.models import Deal, DealProject, Project
 from .serializers import DealProjectAddSerializer, DealSerializer, ProjectSerializer
+
+
+def index(request):
+    return render(request, 'deals/index.html')
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
