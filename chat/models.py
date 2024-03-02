@@ -1,16 +1,22 @@
 from django.db import models
-from shortuuidfield import ShortUUIDField
+from shortuuid import ShortUUID
 from users.models import User
+from shortuuid.django_fields import ShortUUIDField
 
 
 class ChatRoom(models.Model):
-    roomId = ShortUUIDField()
+    roomId = ShortUUIDField(
+        length=16,
+        max_length=16,
+        # prefix="id_",
+        alphabet="abcdefg1234",
+        primary_key=True,)
     type = models.CharField(max_length=10, default='DM')
     member = models.ManyToManyField(User)
     name = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
-        return self.roomId + ' -> ' + str(self.name)
+        return str(self.roomId) + '-' + str(self.name)
 
 
 class ChatMessage(models.Model):

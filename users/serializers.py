@@ -57,7 +57,7 @@ class SignupSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
-            image=validated_data['image']
+            # image=validated_data['image']
         )
         user.set_password(validated_data['password'])
         user.save()
