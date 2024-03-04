@@ -1,7 +1,7 @@
 from django.db import models
-from shortuuid import ShortUUID
-from users.models import User
 from shortuuid.django_fields import ShortUUIDField
+
+from users.models import User
 
 
 class ChatRoom(models.Model):

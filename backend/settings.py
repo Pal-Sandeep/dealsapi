@@ -6,21 +6,18 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-APP_NAME = os.environ.get("CapeZero")
+# APP_NAME = os.environ.get("APP_NAME", "BB Chat API")
 # ALLOWED_HOSTS = [f"{APP_NAME}.fly.dev"]  # ← Updated!
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'sfgqujnqkshqbkhshkqsjh')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
 
 # ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(" ")
-ALLOWED_HOSTS = [".vercel.app", ".render.com", "localhost", "127.0.0.1", "*"]
+ALLOWED_HOSTS = [".vercel.app", ".render.com",
+                 "localhost", "127.0.0.1", "*", ".sandeeppal.com"]
 
 
 # Application definition
@@ -28,7 +25,6 @@ ALLOWED_HOSTS = [".vercel.app", ".render.com", "localhost", "127.0.0.1", "*"]
 INSTALLED_APPS = [
     "daphne",
     "corsheaders",
-    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +34,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_extensions",
     "channels",
+    "users",
     "deals",
     "chat",
     "drf_spectacular",
